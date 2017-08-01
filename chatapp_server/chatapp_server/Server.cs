@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace chatapp_server
@@ -12,15 +16,40 @@ namespace chatapp_server
     /// </summary>
     class Server
     {
+        private TcpListener ServerSocket;
+        private Thread ServerThread;
+
+        public List<ChatRoom> ChatRoomList { get; private set; }
+        public bool ServerStatus { get; private set; }
+ 
         public Server()
         {
-            /*to do:
-             * Load room's list,
-             * Load user's list,
-             * start server thread that ll wait for connections,
-             * 
-            */
+            ChatRoomList = new List<ChatRoom>();
+          
         }
+
+         public bool ServerStart()
+         {
+             ServerSocket = new TcpListener(IPAddress.Parse("127.0.0.1"),36000);
+             ServerThread = new Thread(new ThreadStart(ServerThreadM));
+             ChatRoomList.Add(new ChatRoom("Default", 1));
+             ServerStatus = true;
+             ServerThread.Start();
+             return true;
+         }
+
+         void ServerThreadM()
+         {
+             ServerSocket.Start();
+             while (ServerStatus)
+             {
+
+                 TcpClient NewClient = ServerSocket.AcceptTcpClient();
+                 UserConnection UserConnection = new UserConnection(NewClient, new User(1, "NewUser", "", ""));
+                 Thread.Sleep(100);
+                 Debug.WriteLine("Makapaka");
+             }
+         }
 
         /*to do:
          * server thread,

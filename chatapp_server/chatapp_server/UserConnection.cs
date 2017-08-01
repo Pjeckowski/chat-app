@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Net.Sockets;
+
 
 namespace chatapp_server
 {
@@ -13,6 +16,7 @@ namespace chatapp_server
     /// </summary>
     class UserConnection
     {
+       
         public delegate void EventDelegate(string message, UserConnection ConnectedUser);
 
         /// <summary>
@@ -22,11 +26,20 @@ namespace chatapp_server
 
 
         public User User { get; private set; }
+        public TcpClient ClientSocket { get; private set; }
 
         /// <summary>
         /// Sends message to a client
         /// </summary>
         /// <param name="message"></param>
+        /// 
+
+        public UserConnection(TcpClient ClientSocket, User User)
+        {
+            this.User = User;
+            this.ClientSocket = ClientSocket;
+        }
+
         public void SendMessage(string message)
         { 
         }
