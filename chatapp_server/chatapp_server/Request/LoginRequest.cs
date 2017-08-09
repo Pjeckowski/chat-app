@@ -1,21 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace chatapp_server
 {
-    public class LoginRequest :Request
+    public class LoginRequest : IRequest
     {
-
         public string UserName { get; private set; }
         public string UserPassword { get; private set; }
 
-        public LoginRequest(string UserName, string UserPassword)
+        public LoginRequest(string data)
         {
-            this.UserName = UserName;
-            this.UserPassword = UserPassword;
+            if (!IsValid(data))
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        public void Execute()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool IsValid(string data)
+        {
+            return false;
         }
     }
 }

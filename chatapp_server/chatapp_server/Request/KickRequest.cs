@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace chatapp_server
 {
-    public class KickRequest :Request
+    public class KickRequest : IRequest
     {
+        private static readonly string KICK_REQUEST = "kick";
+
         public User CallingUser { get; private set; }
         public string KickUserName { get; private set; }
 
@@ -16,6 +14,15 @@ namespace chatapp_server
             this.CallingUser = CallingUser;
             this.KickUserName = KickUserName;                
         }
-        
+
+        public void Execute()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private bool IsValid(string CommandBody)
+        {
+            return 0 == CommandBody.IndexOf(KICK_REQUEST, StringComparison.Ordinal);
+        }
     }
 }

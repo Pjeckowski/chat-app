@@ -1,57 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using chatapp_server.Network;
+using chatapp_server.Request;
 
 namespace chatapp_server
 {
-    public class RequestFacory
+    public class RequestFactory
     {
-        public string KickRequestCommand { get; private set; }
-        public string LoginRequestCommand { get; private set; }
-
-        public RequestFacory()
+        public IRequest GetRequest(User CallingUser, IPacket packet)
         {
-            KickRequestCommand = "kick ";
-            LoginRequestCommand = "login ";
-        }
-
-        public IRequest GetRequest(User CallingUser, string RequestBody, RequestInfo RequestInfo)
-        {
-            string CommandBody;
-            
-            if (null != (CommandBody = RequestInfo.IsCommand(RequestBody)))
+            switch (packet.Header)
             {
+                case RequestType.LOGIN:
+                    return new LoginRequest(packet.Body);
 
-                if (IsKickRequest(CommandBody))
-                {
-                    return new KickRequest(CallingUser, KRGetUserName(CommandBody));
-                }
-                else
-                    if (IsLoginRequest(CommandBody))
-                    {
-                        string[] NamePassword = LRGetUserInfo(CommandBody, RequestInfo);
-                        return new LoginRequest(NamePassword[0], NamePassword[1]);
-                    }
-            }
-            else
-            {
-                string Message;
-                if(null != (Message = RequestInfo.IsRMessage(RequestBody)))
-                {
-                }
-            }
-            return null;
-        }
+                case RequestType.KICK:
+                    return null;
 
-        private bool IsKickRequest(string CommandBody)
-        {
-            if (0 == CommandBody.IndexOf(KickRequestCommand))
-            {
-                return true;
-            }
-            return false;
+                case RequestType.MESSAGE:
+                    return null;
+
+                case RequestType.PRIVATE_MESSAGE:
+                    return null;
+
+                default:
+                case RequestType.CORRUPTED:
+                    throw new ArgumentException();
+            }   
         }
 
         public string KRGetUserName(string CommandBody)

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace chatapp_server
+﻿namespace chatapp_server
 {
     /// <summary>
     /// Object that ll contain User's ID, Nickname, Password, Email, Room penalties Etc.
     /// </summary>
-    public class User :IUser
+    public class User : IUser
     {
         public uint ID { get; private set; }
 
