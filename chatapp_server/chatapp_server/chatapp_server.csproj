@@ -53,14 +53,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EnumExtensions.cs" />
+    <Compile Include="IUser.cs" />
+    <Compile Include="Network\IPacket.cs" />
+    <Compile Include="Network\Packet.cs" />
     <Compile Include="Request\LoginRequest.cs" />
+    <Compile Include="Request\RequestFactory.cs" />
+    <Compile Include="Request\RequestType.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="User\Admin.cs" />
     <Compile Include="ChatRoom.cs" />
     <Compile Include="Request\IRequest.cs" />
     <Compile Include="User\IUser.cs" />
     <Compile Include="Request\KickRequest.cs" />
-    <Compile Include="Request\Request.cs" />
-    <Compile Include="Request\RequestFacory.cs" />
     <Compile Include="Request\RequestInfo.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="User\User.cs" />

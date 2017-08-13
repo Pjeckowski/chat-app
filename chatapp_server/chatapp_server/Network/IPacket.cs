@@ -1,6 +1,6 @@
-﻿using chatapp_server.Request;
+﻿
 
-namespace chatapp_server.Network
+namespace chatapp_server
 {
     public interface IPacket
     {

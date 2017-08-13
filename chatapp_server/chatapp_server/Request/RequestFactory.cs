@@ -1,6 +1,5 @@
 ﻿using System;
-using chatapp_server.Network;
-using chatapp_server.Request;
+
 
 namespace chatapp_server
 {
@@ -11,8 +10,15 @@ namespace chatapp_server
             switch (packet.Header)
             {
                 case RequestType.LOGIN:
-                    return new LoginRequest(packet.Body);
-
+                    try
+                    {
+                        return new LoginRequest(packet.Body);
+                    }
+                    catch(ArgumentException)
+                    {
+                        return null;
+                    }
+                    // is that ok what I just did here??
                 case RequestType.KICK:
                     return null;
 
@@ -23,53 +29,9 @@ namespace chatapp_server
                     return null;
 
                 default:
-                case RequestType.CORRUPTED:
-                    throw new ArgumentException();
+                    return null;
             }   
         }
 
-        public string KRGetUserName(string CommandBody)
-        {
-            if (IsKickRequest(CommandBody))
-            {
-                int UserNameSI = CommandBody.IndexOf(KickRequestCommand) + KickRequestCommand.Length;
-                int UserNameLenght = CommandBody.Length - KickRequestCommand.Length;
-
-                string UserName = CommandBody.Substring(UserNameSI, UserNameLenght);
-
-                return UserName;
-            }
-            return null;
-        }
-
-        private bool IsLoginRequest(string CommandBody)
-        {
-            if (0 == CommandBody.IndexOf(LoginRequestCommand))
-                return true;
-            return false;
-        }
-
-        public string[] LRGetUserInfo(string CommandBody, RequestInfo RequestInfo)
-        {
-            int PSindex;
-            if (-1 != (PSindex = CommandBody.IndexOf(RequestInfo.PasswordSeparator)))
-            {
-                string UserName, UserPassword;
-
-                int SI = CommandBody.IndexOf(LoginRequestCommand) + LoginRequestCommand.Length;
-                int Length = PSindex - SI;
-
-                UserName = CommandBody.Substring(SI, Length);
-
-                SI = CommandBody.IndexOf(RequestInfo.PasswordSeparator) + RequestInfo.PasswordSeparator.Length;
-                Length = CommandBody.Length - SI;
-
-                UserPassword = CommandBody.Substring(SI, Length);
-
-                return new string[] { UserName, UserPassword };
-            }
-
-            return null;
-        }
     }
 }

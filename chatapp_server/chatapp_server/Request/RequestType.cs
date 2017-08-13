@@ -1,18 +1,16 @@
 ﻿using System.ComponentModel;
 
-namespace chatapp_server.Request
+namespace chatapp_server
 {
     public enum RequestType
     {
-        [Description("Corrupted")]
-        CORRUPTED,
-        [Description("Kick")]
+        [Description("k")]
         KICK,
-        [Description("Login")]
+        [Description("l")]
         LOGIN,
-        [Description("Message")]
+        [Description("m")]
         MESSAGE,
-        [Description("PrivateMessage")]
+        [Description("p")]
         PRIVATE_MESSAGE
     }
 }
