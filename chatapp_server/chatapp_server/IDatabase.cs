@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace chatapp_server
 {
-    public interface IUser
+    interface IDatabase
     {
+
     }
 }

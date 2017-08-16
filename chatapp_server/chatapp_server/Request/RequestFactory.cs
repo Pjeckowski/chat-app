@@ -5,7 +5,7 @@ namespace chatapp_server
 {
     public class RequestFactory
     {
-        public IRequest GetRequest(User CallingUser, IPacket packet)
+        public IRequest GetRequest(IUser CallingUser, IPacket packet)
         {
             switch (packet.Header)
             {
@@ -20,13 +20,34 @@ namespace chatapp_server
                     }
                     // is that ok what I just did here??
                 case RequestType.KICK:
-                    return null;
+                    try
+                    {
+                        return new KickRequest(CallingUser, packet.Body);
+                    }
+                    catch (ArgumentException)
+                    {
+                        return null;
+                    }
 
                 case RequestType.MESSAGE:
-                    return null;
+                    try
+                    {
+                        return new MessageRequest(CallingUser, packet.Body);
+                    }
+                    catch (ArgumentException)
+                    {
+                        return null;
+                    }
 
                 case RequestType.PRIVATE_MESSAGE:
-                    return null;
+                    try
+                    {
+                        return new MessageRequest(CallingUser, packet.Body);
+                    }
+                    catch (ArgumentException)
+                    {
+                        return null;
+                    }
 
                 default:
                     return null;

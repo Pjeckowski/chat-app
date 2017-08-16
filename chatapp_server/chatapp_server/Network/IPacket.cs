@@ -6,7 +6,5 @@ namespace chatapp_server
     {
         RequestType Header { get; }
         string Body { get; }
-        string RequestStart { get; }
-        string RequestEnd { get; }
     }
 }
