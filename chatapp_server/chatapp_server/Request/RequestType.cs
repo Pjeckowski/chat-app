@@ -11,6 +11,10 @@ namespace chatapp_server
         [Description("m")]
         MESSAGE,
         [Description("p")]
-        PRIVATE_MESSAGE
+        PRIVATE_MESSAGE,
+        [Description("r")]
+        ROOM_ENTER,
+        [Description("s")]
+        ROOM_LEAVE
     }
 }

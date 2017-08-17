@@ -8,5 +8,10 @@ namespace chatapp_server
 {
     public interface IUser
     {
+        uint ID { get; }
+        string Nickname { get; }
+        string Email { get; }
+        string Password { get; }
+        bool IsAdmin();
     }
 }

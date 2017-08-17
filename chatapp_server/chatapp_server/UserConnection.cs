@@ -25,7 +25,7 @@ namespace chatapp_server
         public event EventDelegate MessageReceived;
 
 
-        public User User { get; private set; }
+        public IUser User { get; private set; }
         public TcpClient ClientSocket { get; private set; }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace chatapp_server
         /// <param name="message"></param>
         /// 
 
-        public UserConnection(TcpClient ClientSocket, User User)
+        public UserConnection(TcpClient ClientSocket, IUser User)
         {
             this.User = User;
             this.ClientSocket = ClientSocket;

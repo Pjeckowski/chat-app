@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace chatapp_server
 {
-    public class Admin :User
+    public class Admin : User
     {
         public Admin(uint ID, string Nickname, string Email, string Password)
            : base(ID, Nickname, Email, Password)

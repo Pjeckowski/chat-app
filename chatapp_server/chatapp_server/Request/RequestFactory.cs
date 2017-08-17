@@ -49,6 +49,16 @@ namespace chatapp_server
                         return null;
                     }
 
+                case RequestType.ROOM_ENTER:
+                    try
+                    {
+                        return new RoomEnterRequest(CallingUser, packet.Body);
+                    }
+                    catch (ArgumentException)
+                    {
+                        return null;
+                    }
+
                 default:
                     return null;
             }   

@@ -61,7 +61,7 @@
     <Compile Include="Request\PrivateMessageRequest.cs" />
     <Compile Include="Request\RequestFactory.cs" />
     <Compile Include="Request\RequestType.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Request\RoomEnterRequest.cs" />
     <Compile Include="User\Admin.cs" />
     <Compile Include="ChatRoom.cs" />
     <Compile Include="Request\IRequest.cs" />
