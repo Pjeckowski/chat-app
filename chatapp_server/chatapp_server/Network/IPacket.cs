@@ -1,10 +1,12 @@
 ﻿
 
+using chatapp_server.Network;
+
 namespace chatapp_server
 {
     public interface IPacket
     {
-        RequestType Header { get; }
+        PacketType Header { get; }
         string Body { get; }
     }
 }

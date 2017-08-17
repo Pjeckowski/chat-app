@@ -1,66 +1,35 @@
 ﻿using System;
+using chatapp_server.Exceptions;
 
 
 namespace chatapp_server
 {
     public class RequestFactory
     {
-        public IRequest GetRequest(IUser CallingUser, IPacket packet)
+        public IRequest GetRequest(IUser CallingUser, RequestType requestType, string body)
         {
-            switch (packet.Header)
+            switch (requestType)
             {
                 case RequestType.LOGIN:
-                    try
-                    {
-                        return new LoginRequest(packet.Body);
-                    }
-                    catch(ArgumentException)
-                    {
-                        return null;
-                    }
-                    // is that ok what I just did here??
+                    return new LoginRequest(body);
+
                 case RequestType.KICK:
-                    try
-                    {
-                        return new KickRequest(CallingUser, packet.Body);
-                    }
-                    catch (ArgumentException)
-                    {
-                        return null;
-                    }
+                    return new KickRequest(CallingUser, body);
+                
 
                 case RequestType.MESSAGE:
-                    try
-                    {
-                        return new MessageRequest(CallingUser, packet.Body);
-                    }
-                    catch (ArgumentException)
-                    {
-                        return null;
-                    }
+                    return new MessageRequest(CallingUser, body);
+                    
 
                 case RequestType.PRIVATE_MESSAGE:
-                    try
-                    {
-                        return new MessageRequest(CallingUser, packet.Body);
-                    }
-                    catch (ArgumentException)
-                    {
-                        return null;
-                    }
+                    return new MessageRequest(CallingUser, body);
+                   
 
                 case RequestType.ROOM_ENTER:
-                    try
-                    {
-                        return new RoomEnterRequest(CallingUser, packet.Body);
-                    }
-                    catch (ArgumentException)
-                    {
-                        return null;
-                    }
+                    return new RoomEnterRequest(CallingUser, body);
 
                 default:
-                    return null;
+                    throw new NoSuchRequestException();
             }   
         }
 
