@@ -54,8 +54,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EnumExtensions.cs" />
+    <Compile Include="Exceptions\NoSuchRequestException.cs" />
     <Compile Include="Network\IPacket.cs" />
     <Compile Include="Network\Packet.cs" />
+    <Compile Include="Network\PacketType.cs" />
     <Compile Include="Request\LoginRequest.cs" />
     <Compile Include="Request\MessageRequest.cs" />
     <Compile Include="Request\PrivateMessageRequest.cs" />

@@ -6,7 +6,7 @@ namespace chatapp_server
     public class Packet : IPacket
     {
         // TODO: Replace with Packet Type
-        public RequestType Header { get; private set; }
+        public PacketType Header { get; private set; }
         public string Body { get; private set; }
 
         public static string START_SIGN = "*";
@@ -18,28 +18,34 @@ namespace chatapp_server
             {
                 throw new ArgumentException();
             }
-            //var header = GetHeader(data);
-            //Header = EnumExtensions.GetValueFromDescription<RequestType>(header);
-            //Body = GetBody(data, header);
+            var header = GetHeader(data);
+            Header = EnumExtensions.GetValueFromDescription<PacketType>(header);
+            Body = GetBody(data, header);
         }
 
         // TODO: More intelligent validation
+        // Considering aspects that we have spoke about there is no other option to validate packet other, than checking the
+        // header.
         private bool IsValid(string data)
         {
-            return !string.IsNullOrEmpty(data);
+            if(data.Length >= 2)
+            {
+                return true;
+            }
+            return false;
         }
 
-        //private string GetHeader(string data)
-        //{
-        //    return data.Substring(RequestStart.Length, 1);
-        //}
+        private string GetHeader(string data)
+        {
+            return data.Substring(0, 1);
+        }
 
-        //private string GetBody(string data, string header)
-        //{
-        //    int bodystartindex = RequestStart.Length + header.Length;
-        //    int bodylength = data.Length - bodystartindex - RequestEnd.Length;
+        private string GetBody(string data, string header)
+        {
+            int bodystartindex = header.Length;
+            int bodylength = data.Length - bodystartindex;
 
-        //    return data.Substring(bodystartindex, bodylength);
-        //}
+            return data.Substring(bodystartindex, bodylength);
+        }
     }
 }

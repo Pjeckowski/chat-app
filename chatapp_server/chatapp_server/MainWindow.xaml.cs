@@ -24,6 +24,7 @@ namespace chatapp_server
         public MainWindow()
         {
             InitializeComponent();
+
         }
     }
 }

@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
-namespace chatapp_server.Network
+namespace chatapp_server
 {
     public enum PacketType
     {
+        [Description("")]
+        CORRUPTED,
+        [Description("r")]
+        REQUEST,
+        [Description("u")]
+        UTILITY,
+        [Description("s")]
+        RESPONSE
     }
 }

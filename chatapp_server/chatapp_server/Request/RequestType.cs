@@ -4,6 +4,8 @@ namespace chatapp_server
 {
     public enum RequestType
     {
+        [Description("It doesnt matter")]
+        CORRUPTED,
         [Description("k")]
         KICK,
         [Description("l")]

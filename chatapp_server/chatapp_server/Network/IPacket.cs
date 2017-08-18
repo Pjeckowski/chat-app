@@ -1,6 +1,6 @@
 ﻿
 
-using chatapp_server.Network;
+using chatapp_server;
 
 namespace chatapp_server
 {
