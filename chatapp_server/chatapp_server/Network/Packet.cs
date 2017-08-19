@@ -5,7 +5,6 @@ namespace chatapp_server
 {
     public class Packet : IPacket
     {
-        // TODO: Replace with Packet Type
         public PacketType Header { get; private set; }
         public string Body { get; private set; }
 

@@ -1,22 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace chatapp_server
 {
-    public class MessageRequest : IRequest
+    class RoomEnterRequest : IRequestPacket
     {
         public IUser CallingUser { get; private set; }
-        public string Message { get; private set; }
+        public string RoomName { get; private set; }
 
-        public MessageRequest(IUser CallingUser, string data)
+        public RoomEnterRequest(IUser CallingUser ,string data)
         {
-            if(!IsValid(data))
+            if (!IsValid(data))
             {
                 throw new ArgumentException();
             }
 
             this.CallingUser = CallingUser;
-            this.Message = data;
-
+            RoomName = data;
         }
 
         private bool IsValid(string data)
@@ -25,6 +28,7 @@ namespace chatapp_server
             {
                 return true;
             }
+
             return false;
         }
 

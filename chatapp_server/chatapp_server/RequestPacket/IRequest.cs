@@ -1,6 +1,6 @@
 ﻿namespace chatapp_server
 {
-    public interface IRequest
+    public interface IRequestPacket
     {
         void Execute();
     }

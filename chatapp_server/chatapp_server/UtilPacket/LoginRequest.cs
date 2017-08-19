@@ -2,7 +2,7 @@
 
 namespace chatapp_server
 {
-    public class LoginRequest : IRequest
+    public class LoginRequest : IRequestPacket
     {
         public string UserName { get; private set; }
         public string UserPassword { get; private set; }

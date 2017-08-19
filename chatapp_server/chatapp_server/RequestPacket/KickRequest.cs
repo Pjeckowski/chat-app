@@ -2,7 +2,7 @@
 
 namespace chatapp_server
 {
-    public class KickRequest : IRequest
+    public class KickRequest : IRequestPacket
     {
 
         public IUser CallingUser { get; private set; }

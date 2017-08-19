@@ -4,9 +4,9 @@ using chatapp_server.Exceptions;
 
 namespace chatapp_server
 {
-    public class RequestFactory
+    public class RequestFactory : ExecutablePacketFactory
     {
-        public IRequest GetRequest(IUser CallingUser, RequestType requestType, string body)
+        public IRequestPacket GetExecutablePacket(IUser CallingUser, RequestType requestType, string body)
         {
             switch (requestType)
             {

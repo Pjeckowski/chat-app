@@ -55,21 +55,23 @@
     </ApplicationDefinition>
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Exceptions\NoSuchRequestException.cs" />
+    <Compile Include="ExecutablePacketFactory.cs" />
+    <Compile Include="ExecutablePacket\ExecutablePacket.cs" />
     <Compile Include="Network\IPacket.cs" />
     <Compile Include="Network\Packet.cs" />
     <Compile Include="Network\PacketType.cs" />
-    <Compile Include="Request\LoginRequest.cs" />
-    <Compile Include="Request\MessageRequest.cs" />
-    <Compile Include="Request\PrivateMessageRequest.cs" />
-    <Compile Include="Request\RequestFactory.cs" />
-    <Compile Include="Request\RequestType.cs" />
-    <Compile Include="Request\RoomEnterRequest.cs" />
+    <Compile Include="ResponseFactory.cs" />
+    <Compile Include="UtilPacket\LoginRequest.cs" />
+    <Compile Include="RequestPacket\MessageRequest.cs" />
+    <Compile Include="RequestPacket\PrivateMessageRequest.cs" />
+    <Compile Include="RequestPacket\RequestFactory.cs" />
+    <Compile Include="RequestPacket\RequestType.cs" />
+    <Compile Include="RequestPacket\RoomEnterRequest.cs" />
     <Compile Include="User\Admin.cs" />
     <Compile Include="ChatRoom.cs" />
-    <Compile Include="Request\IRequest.cs" />
+    <Compile Include="RequestPacket\IRequest.cs" />
     <Compile Include="User\IUser.cs" />
-    <Compile Include="Request\KickRequest.cs" />
-    <Compile Include="Request\RequestInfo.cs" />
+    <Compile Include="RequestPacket\KickRequest.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="UserConnection.cs" />
@@ -113,6 +115,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

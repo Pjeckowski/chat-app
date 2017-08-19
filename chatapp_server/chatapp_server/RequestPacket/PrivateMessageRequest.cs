@@ -2,7 +2,7 @@
 
 namespace chatapp_server
 {
-    public class PrivateMessageRequest : IRequest
+    public class PrivateMessageRequest : IRequestPacket
     {
         public IUser CallingUser { get; private set; }
         public string TargetUserName { get; private set; }
