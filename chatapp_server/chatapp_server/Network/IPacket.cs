@@ -1,8 +1,6 @@
 ﻿
 
-using chatapp_server;
-
-namespace chatapp_server
+namespace chatapp_server.Network
 {
     public interface IPacket
     {

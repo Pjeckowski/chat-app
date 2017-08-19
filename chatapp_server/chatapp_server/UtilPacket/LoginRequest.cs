@@ -1,8 +1,9 @@
 ﻿using System;
+using chatapp_server.RequestPacket;
 
-namespace chatapp_server
+namespace chatapp_server.UtilPacket
 {
-    public class LoginRequest : IRequestPacket
+    public class LoginRequest : IRequestCommand
     {
         public string UserName { get; private set; }
         public string UserPassword { get; private set; }

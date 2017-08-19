@@ -1,8 +1,9 @@
 ﻿using System;
+using chatapp_server.Users;
 
-namespace chatapp_server
+namespace chatapp_server.RequestPacket
 {
-    public class KickRequest : IRequestPacket
+    public class KickRequest : IRequestCommand
     {
 
         public IUser CallingUser { get; private set; }
@@ -25,13 +26,6 @@ namespace chatapp_server
 
         private bool IsValid(string data)
         {
-            if(CallingUser is Admin)
-            {
-                if(string.Empty != data && null != data)
-                {
-                    return true;
-                }
-            }
             return false;
         }
     }

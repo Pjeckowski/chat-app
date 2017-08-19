@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace chatapp_server
 {
-    public class ExecutablePacket
+    public interface INetworkCommand
     {
-
+        void Execute();
     }
 }

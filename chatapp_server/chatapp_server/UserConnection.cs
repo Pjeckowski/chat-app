@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
+using chatapp_server.Users;
 
 
 namespace chatapp_server
@@ -14,15 +9,15 @@ namespace chatapp_server
     /// Its going to contain user, thats its made for,
     /// user's connection stuff, and methods to handle sending and receiving.
     /// </summary>
-    class UserConnection
+    public class UserConnection
     {
        
-        public delegate void EventDelegate(string message, UserConnection ConnectedUser);
-
+        public delegate void EventDelegate(string message, UserConnection connectedUser);
+        public event EventDelegate MessageReceived;
         /// <summary>
         /// Event triggered, when message is received from client
         /// </summary>
-        public event EventDelegate MessageReceived;
+        
 
 
         public IUser User { get; private set; }
@@ -34,10 +29,10 @@ namespace chatapp_server
         /// <param name="message"></param>
         /// 
 
-        public UserConnection(TcpClient ClientSocket, IUser User)
+        public UserConnection(TcpClient clientSocket, IUser user)
         {
-            this.User = User;
-            this.ClientSocket = ClientSocket;
+            User = user;
+            ClientSocket = clientSocket;
         }
 
         public void SendMessage(string message)

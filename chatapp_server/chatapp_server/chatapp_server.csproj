@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>5</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,25 +56,28 @@
     </ApplicationDefinition>
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Exceptions\NoSuchRequestException.cs" />
-    <Compile Include="ExecutablePacketFactory.cs" />
-    <Compile Include="ExecutablePacket\ExecutablePacket.cs" />
+    <Compile Include="NetworkCommandFactory.cs" />
+    <Compile Include="INetworkCommandFactory.cs" />
+    <Compile Include="INetworkData.cs" />
     <Compile Include="Network\IPacket.cs" />
     <Compile Include="Network\Packet.cs" />
     <Compile Include="Network\PacketType.cs" />
-    <Compile Include="ResponseFactory.cs" />
+    <Compile Include="ResponsePacket\IResponseCommand.cs" />
+    <Compile Include="ResponsePacket\ResponseFactory.cs" />
+    <Compile Include="ResponsePacket\ResponseType.cs" />
+    <Compile Include="UtilityFacotry.cs" />
     <Compile Include="UtilPacket\LoginRequest.cs" />
     <Compile Include="RequestPacket\MessageRequest.cs" />
     <Compile Include="RequestPacket\PrivateMessageRequest.cs" />
     <Compile Include="RequestPacket\RequestFactory.cs" />
     <Compile Include="RequestPacket\RequestType.cs" />
     <Compile Include="RequestPacket\RoomEnterRequest.cs" />
-    <Compile Include="User\Admin.cs" />
     <Compile Include="ChatRoom.cs" />
     <Compile Include="RequestPacket\IRequest.cs" />
-    <Compile Include="User\IUser.cs" />
+    <Compile Include="Users\IUser.cs" />
     <Compile Include="RequestPacket\KickRequest.cs" />
     <Compile Include="Server.cs" />
-    <Compile Include="User\User.cs" />
+    <Compile Include="Users\User.cs" />
     <Compile Include="UserConnection.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

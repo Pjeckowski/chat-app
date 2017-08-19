@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Sockets;
 
-namespace chatapp_server
+namespace chatapp_server.Users
 {
     public interface IUser
     {
@@ -12,6 +8,7 @@ namespace chatapp_server
         string Nickname { get; }
         string Email { get; }
         string Password { get; }
+        TcpClient TcpClient { get; }
         bool IsAdmin();
     }
 }

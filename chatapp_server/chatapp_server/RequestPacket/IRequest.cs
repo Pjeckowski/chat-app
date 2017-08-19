@@ -1,7 +1,7 @@
-﻿namespace chatapp_server
+﻿namespace chatapp_server.RequestPacket
 {
-    public interface IRequestPacket
+    public interface IRequestCommand : INetworkCommand
     {
-        void Execute();
+        //marker interface
     }
 }

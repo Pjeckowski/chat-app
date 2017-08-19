@@ -1,15 +1,14 @@
 ﻿using System;
 
-
-namespace chatapp_server
+namespace chatapp_server.Network
 {
     public class Packet : IPacket
     {
         public PacketType Header { get; private set; }
         public string Body { get; private set; }
 
-        public static string START_SIGN = "*";
-        public static string END_SIGN = "#";
+        public static char START_SIGN = (char)(1);
+        public static char END_SIGN = (char)(2);
         
         public Packet(string data)
         {

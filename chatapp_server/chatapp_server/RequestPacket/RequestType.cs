@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace chatapp_server
+namespace chatapp_server.RequestPacket
 {
     public enum RequestType
     {

@@ -9,7 +9,7 @@ namespace chatapp_server
     /// <summary>
     /// Room object that ll probably manage all the users connected to the room with the messaging stuff
     /// </summary>
-    class ChatRoom
+    public class ChatRoom
     {
         /// <summary>
         /// Room Name property

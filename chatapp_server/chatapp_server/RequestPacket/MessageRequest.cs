@@ -1,8 +1,9 @@
 ﻿using System;
+using chatapp_server.Users;
 
-namespace chatapp_server
+namespace chatapp_server.RequestPacket
 {
-    public class MessageRequest : IRequestPacket
+    public class MessageRequest : IRequestCommand
     {
         public IUser CallingUser { get; private set; }
         public string Message { get; private set; }

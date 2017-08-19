@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using chatapp_server.Users;
 
-namespace chatapp_server
+namespace chatapp_server.RequestPacket
 {
-    class RoomEnterRequest : IRequestPacket
+    class RoomEnterRequest : IRequestCommand
     {
         public IUser CallingUser { get; private set; }
         public string RoomName { get; private set; }

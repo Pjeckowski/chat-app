@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using chatapp_server.Users;
+
 
 namespace chatapp_server
 {
@@ -14,42 +11,58 @@ namespace chatapp_server
     /// Main object that ll handle new connection requests, add users, create rooms, pass the UserConnections to the rooms,
     /// after user verification is complited and room have been chosen by the user
     /// </summary>
-    class Server
+    public class Server
     {
         private TcpListener ServerSocket;
         private Thread ServerThread;
+        private readonly NetworkCommandFactory networkCommandFactory;
 
         public List<ChatRoom> ChatRoomList { get; private set; }
-        public bool ServerStatus { get; private set; }
+        public bool Connected {get { return null != ServerSocket && ServerSocket.Server.Connected; } }
  
         public Server()
         {
             ChatRoomList = new List<ChatRoom>();
-          
+            networkCommandFactory = new NetworkCommandFactory();
         }
 
          public bool ServerStart()
          {
              ServerSocket = new TcpListener(IPAddress.Parse("127.0.0.1"),36000);
-             ServerThread = new Thread(new ThreadStart(ServerThreadM));
              ChatRoomList.Add(new ChatRoom("Default", 1));
-             ServerStatus = true;
-             ServerThread.Start();
-             return true;
+
+             return Connected;
          }
 
-         void ServerThreadM()
-         {
-             ServerSocket.Start();
-             while (ServerStatus)
-             {
+        private async void Accept()
+        {
+            while (Connected)
+            { 
+                var user = new User(await ServerSocket.AcceptTcpClientAsync());
+                user.MessageReceived += onMessageReceived;
+            }
+        }
 
-                 TcpClient NewClient = ServerSocket.AcceptTcpClient();
-                 UserConnection UserConnection = new UserConnection(NewClient, new User(1, "NewUser", "", ""));
-                 Thread.Sleep(100);
-                 Debug.WriteLine("Makapaka");
-             }
-         }
+        void onMessageReceived(string message, User connectedUser)
+        {
+            
+            throw new System.NotImplementedException();
+        }
+
+
+
+         //void ServerThreadM()
+         //{
+         //    ServerSocket.Start();
+         //    while (Connected)
+         //    {
+
+         //        TcpClient NewClient = ServerSocket.AcceptTcpClient();
+         //        UserConnection UserConnection = new UserConnection(NewClient, new User.User(1, "NewUser", "", ""));
+         //        Thread.Sleep(100);
+         //        Debug.WriteLine("Makapaka");
+         //    }
+         //}
 
         /*to do:
          * server thread,
@@ -62,3 +75,5 @@ namespace chatapp_server
          */
     }
 }
+
+
