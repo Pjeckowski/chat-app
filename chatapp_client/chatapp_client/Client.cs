@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Autofac;
 
 namespace chatapp_client
 {
@@ -94,5 +95,6 @@ namespace chatapp_client
             else
                 return "Client not connected.";
         }
+
     }
 }
