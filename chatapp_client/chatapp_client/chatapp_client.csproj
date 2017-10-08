@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\CommandDispatcher.cs" />
     <Compile Include="Commands\ICommandDispatcher.cs" />
+    <Compile Include="Container\IContainerBuiler.cs" />
     <Compile Include="Handlers\ICommandHandler.cs" />
     <Compile Include="Handlers\RegisterHandler.cs" />
     <Compile Include="IProvider.cs" />

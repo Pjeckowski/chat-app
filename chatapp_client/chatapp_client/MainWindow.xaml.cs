@@ -65,15 +65,11 @@ namespace chatapp_client
         private async void LetsPLayWithThisShiet()
         {
             var builder = new ContainerBuilder();
+            var assemblies = typeof(ICommand).Assembly;
 
-             //Register individual components
-
-            builder.RegisterAssemblyTypes(typeof(ICommandHandler<>).GetTypeInfo().Assembly)
-                .AssignableTo(typeof(ICommandHandler<>))
+            builder.RegisterAssemblyTypes(assemblies)
+                .AsClosedTypesOf(typeof(ICommandHandler<>))
                 .InstancePerLifetimeScope();
-
-            //builder.RegisterType<RegisterHandler>().As<ICommandHandler<Register>>()
-            //    .InstancePerLifetimeScope();
 
             builder.RegisterType<CommandDispatcher>()
                 .As<ICommandDispatcher>()
@@ -81,14 +77,14 @@ namespace chatapp_client
 
             var container = builder.Build();
 
-            var JsonSettings = new JsonSerializerSettings()
+            var jsonSettings = new JsonSerializerSettings()
             {
                 TypeNameHandling = TypeNameHandling.All
             };
 
             string jsonData =
                 "{\"$type\":\"chatapp_client.Register, chatapp_client\",\"Name\":\"LOL\",\"Password\":\"Kol\"}";
-            ICommand lelDS = JsonConvert.DeserializeObject<ICommand>(jsonData, JsonSettings);
+            ICommand lelDS = JsonConvert.DeserializeObject<ICommand>(jsonData, jsonSettings);
 
             ICommandDispatcher dispatcher = container.Resolve<ICommandDispatcher>();
             await dispatcher.DispatchAsync(lelDS);

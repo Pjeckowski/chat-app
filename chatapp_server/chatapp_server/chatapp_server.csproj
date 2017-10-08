@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.4.2.0\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -54,17 +60,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommandBus\CommandBus.cs" />
+    <Compile Include="CommandBus\ICommandBus.cs" />
+    <Compile Include="CommandHandlers\IHandleCommand.cs" />
+    <Compile Include="CommandHandlers\IHandleCommandG.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Container\ContainerModules\CommandModule.cs" />
+    <Compile Include="Container\ContainerModules\SerializerModule.cs" />
+    <Compile Include="Container\IMyContainerBuilder.cs" />
+    <Compile Include="Container\MyContainerBuilder.cs" />
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Exceptions\NoSuchRequestException.cs" />
     <Compile Include="NetworkCommandFactory.cs" />
     <Compile Include="INetworkCommandFactory.cs" />
     <Compile Include="INetworkData.cs" />
-    <Compile Include="Network\IPacket.cs" />
-    <Compile Include="Network\Packet.cs" />
-    <Compile Include="Network\PacketType.cs" />
     <Compile Include="ResponsePacket\IResponseCommand.cs" />
     <Compile Include="ResponsePacket\ResponseFactory.cs" />
     <Compile Include="ResponsePacket\ResponseType.cs" />
+    <Compile Include="Serializer\ISerializer.cs" />
+    <Compile Include="Serializer\NewtonSerializer.cs" />
     <Compile Include="UtilityFacotry.cs" />
     <Compile Include="UtilPacket\LoginRequest.cs" />
     <Compile Include="RequestPacket\MessageRequest.cs" />
@@ -110,6 +124,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

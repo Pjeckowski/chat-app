@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Sockets;
 using System.Text;
-using chatapp_server.Network;
+using chatapp_server.Commands;
+using Newtonsoft.Json;
 
 namespace chatapp_server.Users
 {
@@ -35,13 +37,14 @@ namespace chatapp_server.Users
             while(TcpClient.Connected)
             {
                 var buffer = new byte[BUFFER_SIZE];
-                var bytesRead = await TcpClient.GetStream().ReadAsync(buffer, 0, BUFFER_SIZE);
+                var bytesRead = await TcpClient.GetStream().ReadAsync(buffer, 0, TcpClient.ReceiveBufferSize);
                 Array.Resize(ref buffer, bytesRead);
                 var stringBuffer = Encoding.ASCII.GetString(buffer);
 
                 if (null != MessageReceived)
                 {
-                    MessageReceived(stringBuffer, this);
+                    ICommand lelDS = JsonConvert.DeserializeObject<ICommand>(json, JsonSettings);
+                    Debug.WriteLine(lelDS.ToString());
                 }
             }
         }
@@ -50,7 +53,7 @@ namespace chatapp_server.Users
             return false;
         }
 
-        public void SendMessage(string message)
+        public void SendData(string data)
         {
         }
     }

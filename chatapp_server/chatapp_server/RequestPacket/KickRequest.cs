@@ -16,7 +16,7 @@ namespace chatapp_server.RequestPacket
                 throw new ArgumentException();
             }
             this.CallingUser = CallingUser;
-            this.KickUserName = data;                
+            this.KickUserName = data;
         }
 
         public void Execute()
