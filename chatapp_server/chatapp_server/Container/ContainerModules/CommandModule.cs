@@ -27,7 +27,7 @@ namespace chatapp_server.Container.ContainerModules
                 };
             });
 
-            builder.RegisterType<CommandBus>()
+            builder.RegisterType<CommandBus.CommandBus>()
                 .AsImplementedInterfaces();
         }
 

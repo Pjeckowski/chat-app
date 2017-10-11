@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using chatapp_server.Serializer;
 using chatapp_server.Users;
 
 
@@ -15,21 +16,21 @@ namespace chatapp_server
     {
         private TcpListener ServerSocket;
         private Thread ServerThread;
-        private readonly NetworkCommandFactory networkCommandFactory;
 
-        public List<ChatRoom> ChatRoomList { get; private set; }
+
+ 
         public bool Connected {get { return null != ServerSocket && ServerSocket.Server.Connected; } }
  
         public Server()
         {
-            ChatRoomList = new List<ChatRoom>();
-            networkCommandFactory = new NetworkCommandFactory();
+            
+
         }
 
          public bool ServerStart()
          {
              ServerSocket = new TcpListener(IPAddress.Parse("127.0.0.1"),36000);
-             ChatRoomList.Add(new ChatRoom("Default", 1));
+             //ChatRoomList.Add(new ChatRoom("Default", 1));
 
              return Connected;
          }
@@ -38,8 +39,8 @@ namespace chatapp_server
         {
             while (Connected)
             { 
-                var user = new User(await ServerSocket.AcceptTcpClientAsync());
-                user.MessageReceived += onMessageReceived;
+                var user = new ServerClient.ServerClient(await ServerSocket.AcceptTcpClientAsync(),new NewtonSerializer());
+               // user.MessageReceived += onMessageReceived;
             }
         }
 

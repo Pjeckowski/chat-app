@@ -1,21 +1,10 @@
-﻿using System;
-using System.Diagnostics;
-using System.Net.Sockets;
-using System.Text;
-using chatapp_server.Commands;
-using Newtonsoft.Json;
-
-namespace chatapp_server.Users
+﻿namespace chatapp_server.Users
 {
     /// <summary>
     /// Object that ll contain User's ID, Nickname, Password, Email, Room penalties Etc.
     /// </summary>
     public class User : IUser
     {
-        public delegate void EventDelegate(string message, User connectedUser);
-        public event EventDelegate MessageReceived;
-
-        public static readonly int BUFFER_SIZE = 1024; 
 
         public uint ID { get; private set; }
 
@@ -25,36 +14,5 @@ namespace chatapp_server.Users
 
         public string Password { get; private set; }
 
-        public TcpClient TcpClient { get; private set; }
-
-        public User(TcpClient tcpClient)
-        {
-            TcpClient = tcpClient;
-        }
-
-        private async void DataReceived()
-        {  
-            while(TcpClient.Connected)
-            {
-                var buffer = new byte[BUFFER_SIZE];
-                var bytesRead = await TcpClient.GetStream().ReadAsync(buffer, 0, TcpClient.ReceiveBufferSize);
-                Array.Resize(ref buffer, bytesRead);
-                var stringBuffer = Encoding.ASCII.GetString(buffer);
-
-                if (null != MessageReceived)
-                {
-                    ICommand lelDS = JsonConvert.DeserializeObject<ICommand>(json, JsonSettings);
-                    Debug.WriteLine(lelDS.ToString());
-                }
-            }
-        }
-        public virtual bool IsAdmin()
-        {
-            return false;
-        }
-
-        public void SendData(string data)
-        {
-        }
     }
 }

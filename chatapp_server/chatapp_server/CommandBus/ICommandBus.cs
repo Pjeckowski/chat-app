@@ -1,4 +1,5 @@
-﻿using chatapp_server.Commands;
+﻿using System.Threading.Tasks;
+using chatapp_server.Commands;
 
 namespace chatapp_server.CommandBus
 {

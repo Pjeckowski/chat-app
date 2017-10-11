@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace chatapp_server
+namespace chatapp_server.Repositories
 {
-    public interface INetworkCommand
+    public interface IRepository
     {
-        void Execute();
+        //Marker interface
     }
 }

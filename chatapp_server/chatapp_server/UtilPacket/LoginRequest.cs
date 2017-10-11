@@ -3,7 +3,7 @@ using chatapp_server.RequestPacket;
 
 namespace chatapp_server.UtilPacket
 {
-    public class LoginRequest : IRequestCommand
+    public class LoginRequest 
     {
         public string UserName { get; private set; }
         public string UserPassword { get; private set; }

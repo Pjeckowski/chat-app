@@ -9,6 +9,6 @@ namespace chatapp_server.CommandHandlers
 {
     public interface IHandleCommandG<TCommand> : IHandleCommand where TCommand: ICommand
     {
-        void Handle(TCommand command);
+        Task HandleAsync(TCommand command);
     }
 }

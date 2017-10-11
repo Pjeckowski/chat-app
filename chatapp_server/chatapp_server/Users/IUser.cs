@@ -8,7 +8,5 @@ namespace chatapp_server.Users
         string Nickname { get; }
         string Email { get; }
         string Password { get; }
-        TcpClient TcpClient { get; }
-        bool IsAdmin();
     }
 }

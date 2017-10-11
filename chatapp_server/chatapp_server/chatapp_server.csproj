@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChatRoom\IChatRoom.cs" />
     <Compile Include="CommandBus\CommandBus.cs" />
     <Compile Include="CommandBus\ICommandBus.cs" />
     <Compile Include="CommandHandlers\IHandleCommand.cs" />
@@ -71,25 +72,24 @@
     <Compile Include="Container\MyContainerBuilder.cs" />
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Exceptions\NoSuchRequestException.cs" />
-    <Compile Include="NetworkCommandFactory.cs" />
-    <Compile Include="INetworkCommandFactory.cs" />
-    <Compile Include="INetworkData.cs" />
-    <Compile Include="ResponsePacket\IResponseCommand.cs" />
-    <Compile Include="ResponsePacket\ResponseFactory.cs" />
-    <Compile Include="ResponsePacket\ResponseType.cs" />
+    <Compile Include="Repositories\ChatRoomRepositories\LocalChatRoomRepository.cs" />
+    <Compile Include="Repositories\ChatRoomRepositories\IChatRoomRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\UserRepositories\IUserRepository.cs" />
+    <Compile Include="Repositories\UserRepositories\LocalUserRepository.cs" />
     <Compile Include="Serializer\ISerializer.cs" />
     <Compile Include="Serializer\NewtonSerializer.cs" />
-    <Compile Include="UtilityFacotry.cs" />
+    <Compile Include="ServerClient\IServerClient.cs" />
+    <Compile Include="ServerClient\ServerClient.cs" />
+    <Compile Include="TestClass.cs" />
     <Compile Include="UtilPacket\LoginRequest.cs" />
-    <Compile Include="RequestPacket\MessageRequest.cs" />
-    <Compile Include="RequestPacket\PrivateMessageRequest.cs" />
-    <Compile Include="RequestPacket\RequestFactory.cs" />
-    <Compile Include="RequestPacket\RequestType.cs" />
-    <Compile Include="RequestPacket\RoomEnterRequest.cs" />
-    <Compile Include="ChatRoom.cs" />
-    <Compile Include="RequestPacket\IRequest.cs" />
+    <Compile Include="Commands\MessageCommand.cs" />
+    <Compile Include="Commands\PrivateMessageCommand.cs" />
+    <Compile Include="Commands\RequestType.cs" />
+    <Compile Include="Commands\RoomEnterCommand.cs" />
+    <Compile Include="ChatRoom\ChatRoom.cs" />
     <Compile Include="Users\IUser.cs" />
-    <Compile Include="RequestPacket\KickRequest.cs" />
+    <Compile Include="Commands\KickCommand.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="UserConnection.cs" />
