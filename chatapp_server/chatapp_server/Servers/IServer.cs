@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace chatapp_server.Commands
+namespace chatapp_server.Servers
 {
-    public interface ICommand
+    public interface IServer
     {
-        //Marker
+        // Marker
     }
 }

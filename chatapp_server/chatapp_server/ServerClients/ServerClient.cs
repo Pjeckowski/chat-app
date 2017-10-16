@@ -3,11 +3,12 @@ using System.Diagnostics;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using chatapp_server.Commands;
+using chatapp_server.CommandBus;
 using chatapp_server.Serializer;
 using chatapp_server.Users;
+using Chat_Protocol.Commands;
 
-namespace chatapp_server.ServerClient
+namespace chatapp_server.ServerClients
 {
     public class ServerClient : IServerClient
     {
@@ -18,10 +19,13 @@ namespace chatapp_server.ServerClient
         //public event EventDelegate MessageReceived;
         public TcpClient TcpClient { get; private set; }
 
-        public ServerClient(TcpClient tcpClient, ISerializer serializer)
+        private readonly ICommandBus commandBus;
+
+        public ServerClient(TcpClient tcpClient, ISerializer serializer, ICommandBus commandBus)
         {
             TcpClient = tcpClient;
             Serializer = serializer;
+            this.commandBus = commandBus;
             DataReceiveAsync();
         }
 
@@ -37,6 +41,7 @@ namespace chatapp_server.ServerClient
                 if (null != stringBuffer)
                 {
                     ICommand command = (ICommand) Serializer.Deserialize(stringBuffer);
+                    await commandBus.Send(command);
                     Debug.WriteLine(command.ToString());
                 }
             }

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using chatapp_server.ServerClient;
+using chatapp_server.ServerClients;
 
 namespace chatapp_server.ChatRoom
 { 

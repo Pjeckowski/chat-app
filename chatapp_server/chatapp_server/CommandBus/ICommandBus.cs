@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using chatapp_server.Commands;
+using Chat_Protocol.Commands;
 
 namespace chatapp_server.CommandBus
 {
     public interface ICommandBus
     {
-        void Send<TCommand>(TCommand command) where TCommand : ICommand;
+        Task Send<TCommand>(TCommand command) where TCommand : ICommand;
     }
 }

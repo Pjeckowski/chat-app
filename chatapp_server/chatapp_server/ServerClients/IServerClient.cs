@@ -1,6 +1,6 @@
 ﻿using chatapp_server.Users;
 
-namespace chatapp_server.ServerClient
+namespace chatapp_server.ServerClients
 {
     public interface IServerClient
     {

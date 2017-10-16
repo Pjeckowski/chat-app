@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using chatapp_server.Serializer;
 using chatapp_server.Users;
@@ -12,6 +10,13 @@ namespace chatapp_server.Repositories.UserRepositories
     {
         public List<IUser> UserList;
         private ISerializer Serializer;
+        private static Task completedTask = Task.FromResult(false);
+        
+        public static Task CompletedTask()
+        {
+            return completedTask;
+        }
+
         public LocalUserRepository(ISerializer serializer)
         {
             Serializer = serializer;
@@ -19,7 +24,7 @@ namespace chatapp_server.Repositories.UserRepositories
         }
 
 
-        public void CreateUser(IUser user)
+        public Task CreateUserAsync(IUser user)
         {
             if (null == UserList.Find(oUser => oUser.Nickname == user.Nickname || oUser.Email == user.Email))
             {
@@ -30,9 +35,10 @@ namespace chatapp_server.Repositories.UserRepositories
             {
                 throw new ArgumentException("Nickname or email is already assignet to other user.");
             }
+            return completedTask;
         }
 
-        public void UpdateUser(IUser targetUser, IUser user)
+        public Task UpdateUserAsync(IUser targetUser, IUser user)
         {
             IUser tUser = UserList.Find(oUser => oUser.Nickname == targetUser.Nickname && oUser.Email == targetUser.Email);
             if (tUser == null)
@@ -44,39 +50,43 @@ namespace chatapp_server.Repositories.UserRepositories
                 tUser = targetUser;
                 SaveUserList();
             }
+            return completedTask;
         }
 
-        public void DeleteUser(IUser user)
+        public Task DeleteUserAsync(IUser user)
         {
             UserList.Remove(UserList.Find(oUser => oUser.Nickname == user.Nickname && oUser.Email == user.Email));
             SaveUserList();
+            return completedTask;
         }
 
-        public void DeleteUser(int ID)
+        public Task DeleteUserAsync(int ID)
         {
             UserList.Remove(UserList[ID]);
             SaveUserList();
+            return completedTask;
         }
 
-        public void DeleteUser(string nickname)
+        public Task DeleteUserAsync(string nickname)
         {
             UserList.Remove(UserList.Find(oUser => oUser.Nickname == nickname));
             SaveUserList();
+            return completedTask;
         }
 
-        public IUser GetUser(string nickname)
+        public Task<IUser> GetUserAsync(string nickname)
         {
-            return UserList.Find(oUser => oUser.Nickname == nickname);
+            return Task.FromResult(UserList.Find(oUser => oUser.Nickname == nickname));
         }
 
-        public IUser GetUser(int ID)
+        public Task<IUser> GetUserAsync(int ID)
         {
-            return UserList[ID];
+            return Task.FromResult(UserList[ID]);
         }
 
-        public List<IUser> GetUsers()
+        public Task<List<IUser>> GetUsersAsync()
         {
-            return UserList;
+            return Task.FromResult(UserList);
         }
 
         private List<IUser> LoadUserList()

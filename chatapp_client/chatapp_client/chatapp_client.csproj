@@ -67,6 +67,8 @@
     <Compile Include="IProvider.cs" />
     <Compile Include="Provider.cs" />
     <Compile Include="Commands\Register.cs" />
+    <Compile Include="Serializer\ISerializer.cs" />
+    <Compile Include="Serializer\NewtonSerializer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -110,7 +112,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\protocol\Chat_Protocol\Chat_Protocol.csproj">
+      <Project>{DE49BC23-DEEC-49A5-849D-7C65880BD6D0}</Project>
+      <Name>Chat_Protocol</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

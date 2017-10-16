@@ -65,9 +65,11 @@
     <Compile Include="CommandBus\ICommandBus.cs" />
     <Compile Include="CommandHandlers\IHandleCommand.cs" />
     <Compile Include="CommandHandlers\IHandleCommandG.cs" />
-    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="CommandHandlers\MessageCommandHandler.cs" />
     <Compile Include="Container\ContainerModules\CommandModule.cs" />
     <Compile Include="Container\ContainerModules\SerializerModule.cs" />
+    <Compile Include="Container\ContainerModules\RepositoryModule.cs" />
+    <Compile Include="Container\ContainerModules\ServerModule.cs" />
     <Compile Include="Container\IMyContainerBuilder.cs" />
     <Compile Include="Container\MyContainerBuilder.cs" />
     <Compile Include="EnumExtensions.cs" />
@@ -79,18 +81,14 @@
     <Compile Include="Repositories\UserRepositories\LocalUserRepository.cs" />
     <Compile Include="Serializer\ISerializer.cs" />
     <Compile Include="Serializer\NewtonSerializer.cs" />
-    <Compile Include="ServerClient\IServerClient.cs" />
-    <Compile Include="ServerClient\ServerClient.cs" />
+    <Compile Include="ServerClients\IServerClient.cs" />
+    <Compile Include="ServerClients\ServerClient.cs" />
+    <Compile Include="Servers\IServer.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="UtilPacket\LoginRequest.cs" />
-    <Compile Include="Commands\MessageCommand.cs" />
-    <Compile Include="Commands\PrivateMessageCommand.cs" />
-    <Compile Include="Commands\RequestType.cs" />
-    <Compile Include="Commands\RoomEnterCommand.cs" />
     <Compile Include="ChatRoom\ChatRoom.cs" />
     <Compile Include="Users\IUser.cs" />
-    <Compile Include="Commands\KickCommand.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="Servers\Server.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="UserConnection.cs" />
     <Page Include="MainWindow.xaml">
@@ -134,7 +132,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\protocol\Chat_Protocol\Chat_Protocol.csproj">
+      <Project>{de49bc23-deec-49a5-849d-7c65880bd6d0}</Project>
+      <Name>Chat_Protocol</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

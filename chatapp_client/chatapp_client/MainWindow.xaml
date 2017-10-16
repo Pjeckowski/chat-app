@@ -6,11 +6,12 @@
         <StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                         
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Margin="5,5,5,5" x:Name="Connect_Button" Content="Connect" />
+                <Button Grid.Column="1" Margin="5,5,5,5" x:Name="Connect_Button" Content="Connect" Click="Connect_Button_Click" />
+                <Button Grid.Column="0" Margin = "5,5,5,5"  x:Name="Send_Button" Content="Send" Click="Send_Button_Click" />
             </Grid>
             
         </StackPanel>

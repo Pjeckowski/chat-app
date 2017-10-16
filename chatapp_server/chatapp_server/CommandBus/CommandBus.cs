@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Chat_Protocol.Commands;
 using chatapp_server.CommandHandlers;
-using chatapp_server.Commands;
+
 
 namespace chatapp_server.CommandBus
 {
@@ -14,9 +15,9 @@ namespace chatapp_server.CommandBus
             this.handlersFactory = handlersFactory;
         }
 
-        public async void Send<TCommand>(TCommand command) where TCommand : ICommand
+        public async Task Send<TCommand>(TCommand command) where TCommand : ICommand
         {
-            IHandleCommandG<TCommand> handler = (IHandleCommandG<TCommand>) handlersFactory(typeof(TCommand));
+            var handler = (IHandleCommandG<TCommand>) handlersFactory(typeof(TCommand));
             await handler.HandleAsync(command);
         }
     }

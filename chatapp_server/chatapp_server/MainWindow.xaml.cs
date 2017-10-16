@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Windows;
-using chatapp_server.Repositories.ChatRoomRepositories;
-using chatapp_server.Serializer;
+using Autofac;
+using chatapp_server.Container;
+using chatapp_server.Container.ContainerModules;
+using chatapp_server.Servers;
 
 
 namespace chatapp_server
@@ -13,26 +13,30 @@ namespace chatapp_server
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Server Server;
+        private IContainer container;
+        private IMyContainerBuilder MyContainerBuilder;
+        private List<Module> Modules;
         public MainWindow()
         {
             InitializeComponent();
 
-            List<TestClass> TS = new List<TestClass>();
+            MyContainerBuilder = new MyContainerBuilder();
 
-            TS.Add(new TestClass(1,"1"));
-            TS.Add(new TestClass(2,"2"));
+            Modules = new List<Module>();
+            Modules.Add(new CommandModule());
+            Modules.Add(new RepositoryModule());
+            Modules.Add(new SerializerModule());
+            Modules.Add(new ServerModule());
 
-            var MyTs = new TestClass(1,"1");
+            container = MyContainerBuilder.BuildContainer(Modules);
 
-            var kk = TS.Find(oTS => oTS.Text == "1" && oTS.Number == 1);
-            kk.Number = 4;
-            kk.Text = "4";
-
-            if (TS[0].Number == 4)
+            Server = container.Resolve<Server>();
+            if (Server.ServerStart())
             {
-                TestLabel.Content = "Działa";
+                TestLabel.Content = "Dziala";
             }
-
+            
         }
     }
 }

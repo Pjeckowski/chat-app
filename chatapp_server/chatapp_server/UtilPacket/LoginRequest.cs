@@ -1,5 +1,5 @@
 ﻿using System;
-using chatapp_server.RequestPacket;
+using Chat_Protocol.Commands;
 
 namespace chatapp_server.UtilPacket
 {

@@ -2,6 +2,7 @@
 using Autofac;
 using chatapp_server.CommandBus;
 using chatapp_server.CommandHandlers;
+using Chat_Protocol.Commands;
 
 namespace chatapp_server.Container.ContainerModules
 {
@@ -11,9 +12,14 @@ namespace chatapp_server.Container.ContainerModules
         {
             base.Load(builder);
 
+            var assemblies = typeof(ICommand).Assembly;
+
+
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .Where(x => x.IsAssignableTo<IHandleCommand>())
                 .AsImplementedInterfaces();
+
+            builder.RegisterType<ICommand>().AsSelf().InstancePerLifetimeScope();
 
             builder.Register<Func<Type, IHandleCommand>>(c =>
             {
@@ -27,6 +33,7 @@ namespace chatapp_server.Container.ContainerModules
                 };
             });
 
+            
             builder.RegisterType<CommandBus.CommandBus>()
                 .AsImplementedInterfaces();
         }

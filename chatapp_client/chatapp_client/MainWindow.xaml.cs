@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Reflection;
 using System.Windows;
 using Autofac;
 using chatapp_client.Commands;
 using chatapp_client.Handlers;
+using chatapp_client.Serializer;
+using Chat_Protocol.Commands;
 using Newtonsoft.Json;
 
 namespace chatapp_client
@@ -17,6 +18,7 @@ namespace chatapp_client
     {
         Client Client;
         private IContainer AutContainer;
+        private ISerializer Serializer = new NewtonSerializer();
 
         public MainWindow()
         {
@@ -24,7 +26,7 @@ namespace chatapp_client
 
             Client = new Client();
             Client.MessageReceived += Client_MessageReceived;
-            LetsPLayWithThisShiet();
+            //LetsPLayWithThisShiet();
             //DoSomething();
 
         }
@@ -37,6 +39,13 @@ namespace chatapp_client
         private void Connect_Button_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(Client.Connect("127.0.0.1", 36000));
+        }
+
+        private void Send_Button_Click(object sender, RoutedEventArgs e)
+        {
+           MessageCommand Mcommand = new MessageCommand("I am message");
+            string message = Serializer.Serialize(Mcommand);
+            Client.Send(message);
         }
 
         private void DoSomething()
@@ -89,6 +98,8 @@ namespace chatapp_client
             ICommandDispatcher dispatcher = container.Resolve<ICommandDispatcher>();
             await dispatcher.DispatchAsync(lelDS);
         }
+
+
 
     }
 }
